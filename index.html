@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+  <div>
+
+    <script>
+	$(document).ready(function(){
+   		 const url = 'http://192.168.43.143:3000/listeDeRoms';
+   		 $.ajax({
+        		url: url,
+        		type: 'GET',
+        		success: function(reponse){
+            			console.log('Result: ', reponse);
+            			$.each(reponse, function(index, valeur) {
+                			$('#selection').append($('<option>', {
+                       				value: valeur,
+			                        text: valeur
+                			}));
+            			});
+        		},
+        		error: function(error){
+                		console.log('Error...');
+        		}
+    		});
+	});
+    </script>
+  </div>
+
+  <form action="/" enctype="multipart/form-data" method="post">
+    <select name="selection" id="selection">
+        <option selected="yes">Sélection du dossier </option>
+    </select>
+    <input type="file" name="upload" multiple>
+    <input type="submit" value="Upload">
+  </form>
+
+</body>
+</html>
