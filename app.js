@@ -5,9 +5,6 @@ const fs = require('fs')
 const app = express();
 const PORT = 3000;
 
-const files = fs.readdirSync('/home/pi/RetroPie/roms/');
-//console.log('...File: ', files);
-
 app.use('/file', express.static('../'), serveIndex('../', {'icons': true}));
 
 app.get('/upload', function(req, res) {
@@ -15,6 +12,7 @@ app.get('/upload', function(req, res) {
 });
 
 app.get('/listeDeRoms', function(req, res) {
+	let files = fs.readdirSync('/home/pi/RetroPie/roms/');
 	res.send(files);
 });
 
